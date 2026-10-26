@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CanonicalSkillDefinition",
+  "description": "Schema for validating Canonical Skill metadata and progressive disclosure tiers.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "version",
+    "category",
+    "description",
+    "trigger_patterns",
+    "tools_required",
+    "tier_level"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^CAN-SKL-([0-9]{2}|XX)$"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "category": {
+      "type": "string",
+      "minLength": 3
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10
+    },
+    "trigger_patterns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "tools_required": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tier_level": {
+      "type": "integer",
+      "enum": [
+        1,
+        2,
+        3
+      ],
+      "description": "1: Metadata (always loaded), 2: Core SKILL.md, 3: Deep references/guide.md"
+    },
+    "instructions_path": {
+      "type": "string"
+    },
+    "references_path": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

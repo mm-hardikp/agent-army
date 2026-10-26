@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CanonicalAgentDefinition",
+  "description": "Schema for validating Canonical Specialist Agent frontmatter and metadata in CAN-AGT-SPEC format.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "version",
+    "battalion",
+    "description",
+    "role",
+    "goal",
+    "backstory",
+    "permission_level",
+    "tools_required",
+    "skills_required",
+    "boundaries"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^CAN-AGT-([0-9]{2}|XX)$"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "battalion": {
+      "type": "string",
+      "enum": [
+        "Command & Control",
+        "Strategy & Discovery",
+        "Core Engineering",
+        "Precision Mutation & Quality",
+        "Reliability & Documentation",
+        "Data & Automation"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10
+    },
+    "role": {
+      "type": "string",
+      "minLength": 5
+    },
+    "goal": {
+      "type": "string",
+      "minLength": 10
+    },
+    "backstory": {
+      "type": "string",
+      "minLength": 10
+    },
+    "permission_level": {
+      "type": "integer",
+      "enum": [
+        1,
+        2,
+        3
+      ]
+    },
+    "tools_required": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "skills_required": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "boundaries": {
+      "type": "object",
+      "required": [
+        "authorized",
+        "prohibited"
+      ],
+      "properties": {
+        "authorized": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "prohibited": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "delegation_rules": {
+      "type": "object",
+      "properties": {
+        "can_delegate_to": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cannot_delegate_to": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

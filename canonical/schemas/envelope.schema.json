@@ -1,0 +1,227 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CAN-ENV-01-v2.2-ProtocolEnvelope",
+  "description": "Schema for inter-agent communication, handoffs, change requests, and cancellations.",
+  "type": "object",
+  "required": [
+    "version",
+    "message_id",
+    "correlation_id",
+    "task_id",
+    "timestamp",
+    "message_type",
+    "sending_agent",
+    "receiving_agent",
+    "status_summary",
+    "explicit_next_action"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "2.2.0"
+    },
+    "message_id": {
+      "type": "string",
+      "pattern": "^MSG-[0-9]{4}-[0-9A-Za-z_-]+$"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "idempotency_key": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "message_type": {
+      "type": "string",
+      "enum": [
+        "TASK_ASSIGNMENT",
+        "TASK_ACCEPTANCE",
+        "TASK_COMPLETION",
+        "HANDOFF",
+        "CLARIFICATION_REQUEST",
+        "CHANGE_REQUEST",
+        "REVIEW_FINDING",
+        "BLOCKER",
+        "DISAGREEMENT",
+        "APPROVAL_REQUEST",
+        "APPROVAL_RESPONSE",
+        "TASK_REASSIGNMENT",
+        "TASK_CANCELLATION"
+      ]
+    },
+    "sending_agent": {
+      "type": "string",
+      "minLength": 2
+    },
+    "receiving_agent": {
+      "type": "string",
+      "minLength": 2
+    },
+    "target_specialist": {
+      "type": "string"
+    },
+    "attempt_number": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "requires_ack": {
+      "type": "boolean"
+    },
+    "status_summary": {
+      "type": "string",
+      "minLength": 5
+    },
+    "acceptance_criteria_status": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "description",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "MET",
+              "IN_PROGRESS",
+              "BLOCKED",
+              "FAILED",
+              "BLOCKED_ON_CONTRACT"
+            ]
+          }
+        }
+      }
+    },
+    "change_request_details": {
+      "type": "object",
+      "properties": {
+        "target_interface": {
+          "type": "string"
+        },
+        "nature_of_change": {
+          "type": "string"
+        },
+        "proposed_field": {
+          "type": "string"
+        },
+        "rationale": {
+          "type": "string"
+        }
+      }
+    },
+    "artifacts_and_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type",
+          "path"
+        ],
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "blocker_info": {
+      "type": "object",
+      "properties": {
+        "is_hard_blocker": {
+          "type": "boolean"
+        },
+        "can_proceed_with_mocks": {
+          "type": "boolean"
+        },
+        "workaround_in_use": {
+          "type": "string"
+        }
+      }
+    },
+    "review_findings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cancellation_details": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string"
+        },
+        "rollback_target_checkpoint": {
+          "type": "string"
+        },
+        "locks_to_release": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cleanup_actions_completed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "handoff_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "turn",
+          "agent",
+          "action"
+        ],
+        "properties": {
+          "turn": {
+            "type": "integer"
+          },
+          "agent": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "explicit_next_action": {
+      "type": "object",
+      "required": [
+        "recommended_target",
+        "required_action"
+      ],
+      "properties": {
+        "recommended_target": {
+          "type": "string"
+        },
+        "required_action": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}
