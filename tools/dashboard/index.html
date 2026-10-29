@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Army — Mission Control & Command Cockpit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- App Container -->
+  <div class="app-layout">
+    
+    <!-- Top Navigation Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <div class="brand-logo">
+          <div class="logo-shield">⚡</div>
+          <div class="brand-text">
+            <span class="brand-name">AGENT ARMY</span>
+            <span class="brand-sub">MISSION CONTROL</span>
+          </div>
+        </div>
+        <div class="cockpit-badge">
+          <span class="pulse-dot"></span>
+          <span class="cockpit-text">IDE COCKPIT ACTIVE</span>
+          <span class="version-tag">v1.1.0</span>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="nav-tabs" role="tablist">
+        <button class="nav-tab active" data-tab="mission" id="tab-mission">
+          <span class="tab-icon">🚀</span>
+          <span>Mission Control</span>
+        </button>
+        <button class="nav-tab" data-tab="roster" id="tab-roster">
+          <span class="tab-icon">👥</span>
+          <span>Army Roster <span class="badge" id="roster-count">19</span></span>
+        </button>
+        <button class="nav-tab" data-tab="memory" id="tab-memory">
+          <span class="tab-icon">🧠</span>
+          <span>Memory Vault</span>
+        </button>
+        <button class="nav-tab" data-tab="diagnostics" id="tab-diagnostics">
+          <span class="tab-icon">🛠️</span>
+          <span>Diagnostics</span>
+        </button>
+        <button class="nav-tab" data-tab="settings" id="tab-settings">
+          <span class="tab-icon">⚙️</span>
+          <span>AI Providers</span>
+        </button>
+      </nav>
+
+      <div class="header-right">
+        <div class="server-status" id="server-status">
+          <span class="status-indicator"></span>
+          <span class="status-label">127.0.0.1:8765</span>
+        </div>
+        <button class="btn btn-primary" id="btn-quick-dispatch">
+          <span>+ Dispatch Mission</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="app-main">
+      
+      <!-- TAB 1: MISSION CONTROL -->
+      <section class="tab-panel active" id="panel-mission">
+        <!-- Top Mission Hero -->
+        <div class="mission-hero card glass-panel">
+          <div class="hero-header">
+            <div class="hero-title-group">
+              <span class="badge badge-accent" id="hero-workflow-badge">CAN-WFL-01 (Feature Development)</span>
+              <h1 class="hero-title" id="hero-mission-title">GP Doctor Web Application</h1>
+            </div>
+            <div class="hero-status-group">
+              <span class="status-pill status-active" id="hero-status-pill">
+                <span class="pulse-ring"></span> IN PROGRESS
+              </span>
+              <span class="agent-pill" id="hero-agent-pill">
+                Active: <strong>backend-engineer</strong>
+              </span>
+            </div>
+          </div>
+
+          <!-- Visual Workflow Pipeline DAG -->
+          <div class="pipeline-dag-container">
+            <div class="pipeline-label">COGNITIVE WORKFLOW PIPELINE:</div>
+            <div class="pipeline-dag" id="pipeline-dag">
+              <!-- Dynamically populated stages -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 2-Column Cockpit Grid -->
+        <div class="cockpit-grid">
+          
+          <!-- Left Column: Mission Dispatcher & Generator -->
+          <div class="cockpit-col">
+            <div class="card glass-panel">
+              <div class="card-header">
+                <h2>🚀 Dispatch New Mission</h2>
+                <span class="card-subtitle">Queue task in .agent/inbox.json & generate IDE prompt</span>
+              </div>
+              <form id="dispatch-form" class="dispatch-form">
+                <div class="form-row">
+                  <div class="form-group flex-1">
+                    <label for="dispatch-project">Target Project / Repository</label>
+                    <input type="text" id="dispatch-project" class="form-control" value="GP-Doctor" placeholder="e.g. GP-Doctor">
+                  </div>
+                  <div class="form-group flex-1">
+                    <label for="dispatch-workflow">Cognitive Workflow</label>
+                    <select id="dispatch-workflow" class="form-control">
+                      <option value="CAN-WFL-01" selected>CAN-WFL-01: Full-Cycle Feature Development</option>
+                      <option value="CAN-WFL-02">CAN-WFL-02: Bug Triage & Rapid Fix</option>
+                      <option value="CAN-WFL-03">CAN-WFL-03: Adversarial Code Review</option>
+                      <option value="CAN-WFL-04">CAN-WFL-04: Tech Research & Spike</option>
+                      <option value="CAN-WFL-07">CAN-WFL-07: Documentation Synchronization</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="dispatch-goal">Mission Directive / Goal Description</label>
+                  <textarea id="dispatch-goal" class="form-control" rows="3" placeholder="Describe what you want the agents to build or fix (e.g. Build patient consultation intake form with SQLite persistence and daily revenue aggregation)..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary btn-block">
+                    <span>⚡ Dispatch Mission & Generate Ignition Prompt</span>
+                  </button>
+                </div>
+              </form>
+
+              <!-- Ignition Output Box -->
+              <div class="ignition-box" id="ignition-box" style="display: none;">
+                <div class="ignition-header">
+                  <span class="ignition-tag">READY TO IGNITE IN ANTIGRAVITY / CURSOR</span>
+                  <button class="btn btn-sm btn-outline" id="btn-copy-prompt">📋 Copy Prompt</button>
+                </div>
+                <pre class="ignition-code" id="ignition-prompt-text"></pre>
+                <div class="ignition-help">
+                  Paste this into your IDE chat (Antigravity, Cursor, or Claude Code). The Orchestrator will read <code>.agent/inbox.json</code> and coordinate the specialist battalion.
+                </div>
+              </div>
+            </div>
+
+            <!-- Active File Locks Card -->
+            <div class="card glass-panel mt-4">
+              <div class="card-header">
+                <h2>🔒 Active File Reservation Leases</h2>
+                <span class="card-subtitle">Multi-agent write collision prevention</span>
+              </div>
+              <div class="locks-table-container">
+                <table class="data-table" id="locks-table">
+                  <thead>
+                    <tr>
+                      <th>File Path</th>
+                      <th>Holder Agent</th>
+                      <th>Mode</th>
+                      <th>Expires</th>
+                    </tr>
+                  </thead>
+                  <tbody id="locks-tbody">
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Live Message Feed & Telemetry -->
+          <div class="cockpit-col">
+            <div class="card glass-panel h-full">
+              <div class="card-header">
+                <div class="header-split">
+                  <div>
+                    <h2>📡 Live Telemetry & Event Stream</h2>
+                    <span class="card-subtitle">CAN-ENV-01 Message envelopes & agent handoffs</span>
+                  </div>
+                  <button class="btn btn-xs btn-outline" id="btn-refresh-telemetry">🔄 Refresh</button>
+                </div>
+              </div>
+              <div class="events-feed" id="events-feed">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TAB 2: AGENT ARMY ROSTER -->
+      <section class="tab-panel" id="panel-roster">
+        <div class="section-header">
+          <div>
+            <h1>Canonical Agent Army (19 Specialists)</h1>
+            <p class="section-desc">Decoupled cognitive personas. 100% language and framework agnostic.</p>
+          </div>
+          <div class="roster-filters" id="roster-filters">
+            <button class="filter-btn active" data-filter="all">All (19)</button>
+            <button class="filter-btn" data-filter="Command & Control">Command & Control</button>
+            <button class="filter-btn" data-filter="Strategy & Discovery">Strategy & Discovery</button>
+            <button class="filter-btn" data-filter="Core Engineering">Core Engineering</button>
+            <button class="filter-btn" data-filter="Precision Mutation & Quality">Quality & Gates</button>
+            <button class="filter-btn" data-filter="Reliability & Documentation">Memory & Docs</button>
+            <button class="filter-btn" data-filter="Data & Automation">Data & Ops</button>
+          </div>
+        </div>
+
+        <div class="roster-grid" id="roster-grid">
+          <!-- Populated dynamically with 19 agent cards -->
+        </div>
+      </section>
+
+      <!-- TAB 3: MEMORY VAULT EXPLORER -->
+      <section class="tab-panel" id="panel-memory">
+        <div class="section-header">
+          <div>
+            <h1>🧠 Long-Term Memory Vault</h1>
+            <p class="section-desc">Managed by <code>memory-keeper</code> (CAN-AGT-19) at <code>C:\Agent-Memory\</code></p>
+          </div>
+          <div class="vault-stats" id="vault-stats">
+            <span class="stat-badge">Storage: <strong>C:\Agent-Memory</strong></span>
+          </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="memory-search-bar card glass-panel">
+          <div class="search-input-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="memory-search-input" class="search-input" placeholder="Search memories: e.g. 'why did we choose sqlite', 'revenue calculation', 'schema design'...">
+            <button class="btn btn-primary" id="btn-memory-search">Search Vault</button>
+          </div>
+          <div class="quick-tags" id="memory-quick-tags">
+            <span class="quick-tag-label">Popular tags:</span>
+            <button class="tag-pill" data-tag="sqlite">sqlite</button>
+            <button class="tag-pill" data-tag="database">database</button>
+            <button class="tag-pill" data-tag="architecture">architecture</button>
+            <button class="tag-pill" data-tag="canonical">canonical</button>
+            <button class="tag-pill" data-tag="doctor">doctor</button>
+          </div>
+        </div>
+
+        <!-- Memories Grid -->
+        <div class="memories-container">
+          <div class="memories-grid" id="memories-grid">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: SYSTEM DIAGNOSTICS -->
+      <section class="tab-panel" id="panel-diagnostics">
+        <div class="section-header">
+          <div>
+            <h1>🛠️ Standalone Diagnostic Tools</h1>
+            <p class="section-desc">Run zero-dependency AST pre-commit linters, scanners, and automated test suites.</p>
+          </div>
+        </div>
+
+        <div class="diagnostics-actions card glass-panel">
+          <div class="tool-launcher-grid">
+            <div class="tool-card">
+              <div class="tool-info">
+                <h3>Automated Test Suite</h3>
+                <p>Executes all 48 unit tests (schemas, memory vault, adapters, protocols).</p>
+              </div>
+              <button class="btn btn-accent" id="btn-run-tests">▶ Run Tests (48)</button>
+            </div>
+
+            <div class="tool-card">
+              <div class="tool-info">
+                <h3>AST Syntax Linter</h3>
+                <p>Validates AST syntax across 14 languages without building whole project.</p>
+              </div>
+              <button class="btn btn-outline" id="btn-run-linter">▶ Run AST Linter</button>
+            </div>
+
+            <div class="tool-card">
+              <div class="tool-info">
+                <h3>AST Symbol Extractor</h3>
+                <p>Extracts classes, functions, and signatures with ~80% token reduction.</p>
+              </div>
+              <button class="btn btn-outline" id="btn-run-scanner">▶ Run Symbol Scanner</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terminal Output Window -->
+        <div class="terminal-card card glass-panel mt-4">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <span class="terminal-title" id="terminal-title">Execution Console</span>
+            <button class="btn btn-xs btn-outline" id="btn-clear-terminal">Clear</button>
+          </div>
+          <pre class="terminal-body" id="terminal-body">Select a tool above to execute real-time diagnostics...</pre>
+        </div>
+      </section>
+
+      <!-- TAB 5: AI PROVIDERS & SETTINGS -->
+      <section class="tab-panel" id="panel-settings">
+        <div class="section-header">
+          <div>
+            <h1>⚙️ AI Providers & Cockpit Settings</h1>
+            <p class="section-desc">Configure your LLM execution mode and API provider credentials.</p>
+          </div>
+        </div>
+
+        <div class="settings-grid">
+          <div class="card glass-panel">
+            <div class="card-header">
+              <h2>Execution Mode</h2>
+              <span class="card-subtitle">Choose how tasks are executed</span>
+            </div>
+            <div class="mode-selector">
+              <label class="mode-card active" id="mode-bridge-card">
+                <input type="radio" name="exec-mode" value="IDE_BRIDGE" checked>
+                <div class="mode-details">
+                  <div class="mode-title">Pattern A: IDE Bridge (Recommended)</div>
+                  <div class="mode-desc">Uses Antigravity, Cursor, or Claude Code as the LLM engine. $0 extra cost, uses your existing IDE subscription.</div>
+                </div>
+              </label>
+
+              <label class="mode-card" id="mode-direct-card">
+                <input type="radio" name="exec-mode" value="DIRECT_API">
+                <div class="mode-details">
+                  <div class="mode-title">Pattern B: Direct Browser API</div>
+                  <div class="mode-desc">The dashboard server connects directly to Gemini, Anthropic, or OpenAI APIs using your own keys.</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Provider API Keys -->
+          <div class="card glass-panel">
+            <div class="card-header">
+              <h2>API Provider Keys (Optional for Pattern B)</h2>
+              <span class="card-subtitle">Keys are stored locally on your machine in .agent/settings.json</span>
+            </div>
+            <form id="settings-form" class="settings-form">
+              <div class="form-group">
+                <label for="key-gemini">Google Gemini API Key</label>
+                <input type="password" id="key-gemini" class="form-control" placeholder="AIzaSy...">
+              </div>
+              <div class="form-group">
+                <label for="key-anthropic">Anthropic Claude API Key</label>
+                <input type="password" id="key-anthropic" class="form-control" placeholder="sk-ant-api03-...">
+              </div>
+              <div class="form-group">
+                <label for="key-openai">OpenAI API Key</label>
+                <input type="password" id="key-openai" class="form-control" placeholder="sk-proj-...">
+              </div>
+              <div class="form-group">
+                <label for="url-ollama">Local Ollama URL (Free / Local)</label>
+                <input type="text" id="url-ollama" class="form-control" value="http://localhost:11434">
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save Provider Settings</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- LEVEL 3 HUMAN APPROVAL MODAL -->
+    <div class="modal-backdrop" id="modal-approval" style="display: none;">
+      <div class="modal-card card glass-panel">
+        <div class="modal-header">
+          <div class="modal-badge-warn">⚠️ LEVEL 3 HUMAN GATE REQUIRED</div>
+          <button class="modal-close" id="btn-close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <h3 id="modal-agent-action">backend-engineer requested permission to execute database migration</h3>
+          <p class="modal-desc" id="modal-action-desc">Target: <code>migrations/001_initial.sql</code>. Live table alterations or remote pushes require explicit supervisor sign-off.</p>
+          
+          <div class="payload-box">
+            <pre id="modal-payload-code">-- SQL Migration Payload:
+ALTER TABLE patients ADD COLUMN date_of_birth DATE;
+CREATE INDEX idx_patients_dob ON patients(date_of_birth);</pre>
+          </div>
+
+          <div class="feedback-input-box">
+            <label for="gate-feedback">Supervisor Instructions / Modification (Optional):</label>
+            <input type="text" id="gate-feedback" class="form-control" placeholder="Enter instructions or modified payload...">
+          </div>
+        </div>
+
+        <div class="modal-footer 4-quadrant-gate">
+          <button class="btn btn-success" data-action="approve" id="btn-gate-approve">✓ Approve & Proceed</button>
+          <button class="btn btn-accent" data-action="edit" id="btn-gate-edit">✏️ Edit Payload</button>
+          <button class="btn btn-warning" data-action="feedback" id="btn-gate-feedback">💬 Give Instructions</button>
+          <button class="btn btn-danger" data-action="reject" id="btn-gate-reject">✕ Reject / Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEMORY DETAIL MODAL -->
+    <div class="modal-backdrop" id="modal-memory" style="display: none;">
+      <div class="modal-card modal-lg card glass-panel">
+        <div class="modal-header">
+          <div class="modal-title-group">
+            <span class="badge badge-accent" id="mem-detail-project">GP-Doctor</span>
+            <h2 id="mem-detail-title">Memory Detail</h2>
+          </div>
+          <button class="modal-close" id="btn-close-mem-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="mem-metadata-bar">
+            <span>ID: <code id="mem-detail-id"></code></span>
+            <span>Date: <span id="mem-detail-date"></span></span>
+            <span>File: <code id="mem-detail-file"></code></span>
+          </div>
+          <div class="markdown-body" id="mem-detail-body">
+            <!-- Full markdown rendered here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toast-container"></div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

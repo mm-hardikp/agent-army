@@ -82,3 +82,6 @@ Thumbs.db
 .vscode/*
 !.vscode/tasks.json
 !.vscode/settings.json
+
+# Local Agent Army Runtime State
+.agent/
