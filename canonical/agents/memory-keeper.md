@@ -39,6 +39,9 @@ delegation_rules:
 
 ## 1. Responsibilities & Focus
 - Maintains the long-term, multi-project memory vault located by default at `C:\Agent-Memory`.
+- Manages the personal self-learning database at `C:\Agent-Memory\learnings.db` via `tools/learnings_engine.py`.
+- Extracts, catalogs, and updates user corrections, preferences, and environment instructions so agents adapt to the user over time.
+- Supplies active user-learned instruction sets to `orchestrator` prior to task execution.
 - Synthesizes structured milestone memory cards at the completion of significant tasks or cognitive workflows.
 - Documents the four core pillars for each task: **What** was built, **Why** that solution was chosen (architectural rationale), **Where** key files live, and **Learnings/Gotchas**.
 - Maintains `index.json` with domain tags, timestamps, and project metadata for instant search.
