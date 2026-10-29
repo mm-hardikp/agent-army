@@ -31,9 +31,9 @@ class TestCanonicalSchemas(unittest.TestCase):
         errors = validate_file(template_path, self.skill_schema)
         self.assertEqual(errors, [], f"Skill template failed schema validation: {errors}")
 
-    def test_all_18_canonical_skills_validation(self):
+    def test_all_19_canonical_skills_validation(self):
         skill_files = list(self.skills_dir.glob("*/SKILL.md"))
-        self.assertEqual(len(skill_files), 18, f"Expected 18 canonical skills, found {len(skill_files)}")
+        self.assertEqual(len(skill_files), 19, f"Expected 19 canonical skills, found {len(skill_files)}")
 
         seen_ids = set()
         seen_names = set()
@@ -51,12 +51,12 @@ class TestCanonicalSchemas(unittest.TestCase):
             seen_ids.add(skill_id)
             seen_names.add(skill_name)
 
-        expected_ids = {f"CAN-SKL-{i:02d}" for i in range(1, 19)}
+        expected_ids = {f"CAN-SKL-{i:02d}" for i in range(1, 20)}
         self.assertEqual(seen_ids, expected_ids, f"Mismatch in canonical skill IDs: {expected_ids - seen_ids}")
 
-    def test_all_18_canonical_agents_validation(self):
+    def test_all_19_canonical_agents_validation(self):
         agent_files = list(self.agents_dir.glob("*.md"))
-        self.assertEqual(len(agent_files), 18, f"Expected 18 canonical agent definitions, found {len(agent_files)}")
+        self.assertEqual(len(agent_files), 19, f"Expected 19 canonical agent definitions, found {len(agent_files)}")
 
         expected_agents = {
             "CAN-AGT-01": "orchestrator",
@@ -76,7 +76,8 @@ class TestCanonicalSchemas(unittest.TestCase):
             "CAN-AGT-15": "docs-technical-writer",
             "CAN-AGT-16": "research-investigator",
             "CAN-AGT-17": "data-analyst",
-            "CAN-AGT-18": "automation-specialist"
+            "CAN-AGT-18": "automation-specialist",
+            "CAN-AGT-19": "memory-keeper"
         }
 
         seen_ids = {}

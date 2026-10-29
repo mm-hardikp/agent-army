@@ -57,7 +57,8 @@ The Orchestrator must pause execution, present the 4-quadrant human approval gat
 | **1B** | `MS-05` | 10 Cognitive Workflows | **`COMPLETED`** | 10 workflows under `canonical/workflows/` (`CAN-WFL-01` through `CAN-WFL-10`), 27 unit tests passing. | 2026-10-24 |
 | **1B** | `MS-5.1` | Project State Ledger & Orchestrator Lifecycle Engine | **`COMPLETED`** | `PROJECT_STATE.md`, enhanced `canonical/agents/orchestrator.md` lifecycle loop, `test_project_state.py`, 31 unit tests passing. | 2026-10-24 |
 | **1B** | MS-06 | Universal Root Entry Point & Optional IDE Pointer Shims | **COMPLETED** | Root ORCHESTRATOR.md ignition file, dapters/compile.py supporting all 4 IDE targets, 	est_adapters.py, 36 unit tests passing. | 2026-10-24 |
-| **1B** | MS-07 | End-to-End Multi-IDE Integration Simulation & Verification | **COMPLETED** | Cross-IDE simulated workflow execution, CAN-ENV-01 v2.2 message loop, 	est_simulation.py, 42 unit tests passing. | 2026-10-24 |
+| **1B** | MS-07 | End-to-End Multi-IDE Integration Simulation & Verification | **COMPLETED** | Cross-IDE simulated workflow execution, CAN-ENV-01 v2.2 message loop, test_simulation.py, 42 unit tests passing. | 2026-10-24 |
+| **1B** | MS-08 | Persistent Memory Engine & CAN-AGT-19 (memory-keeper) | **COMPLETED** | Added `CAN-AGT-19` (`memory-keeper`), `CAN-SKL-19` (`cognitive-memory-recall`), `tools/memory_vault.py` (zero-dependency vault engine), `tests/test_memory_vault.py`, live vault at `C:\Agent-Memory`, 48 unit tests passing. | 2026-10-29 |
 
 ---
 

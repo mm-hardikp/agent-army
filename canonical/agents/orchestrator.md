@@ -52,6 +52,7 @@ delegation_rules:
     - "research-investigator"
     - "data-analyst"
     - "automation-specialist"
+    - "memory-keeper"
   cannot_delegate_to: []
 ---
 
